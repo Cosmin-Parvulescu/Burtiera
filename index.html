@@ -126,7 +126,7 @@
             this.shareOnFb = function() {
                 FB.ui({
                     method: 'share',
-                    href: 'https://cosmin-parvulescu.github.io/Burtiera/?mesaj=' + $('<div/>').text(this.inputText()).html()
+                    href: 'https://cosmin-parvulescu.github.io/Burtiera/index.html?mesaj=' + $('<div/>').text(this.inputText()).html()
                 }, function(response){});
             }.bind(this);
             var mesaj = getParameterByName('mesaj');
