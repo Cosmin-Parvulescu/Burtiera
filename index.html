@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        html,
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #background {
+            height: 100vh;
+            background: url('/pics/gadea.png');
+        }
+        
+        #banda-galbena {
+            position: absolute;
+            top: 60%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            margin: 0 25px;
+            text-align: center;
+            border: 2px solid black;
+        }
+        
+        #banda-neagra {
+            height: 75px;
+            background: black;
+        }
+        
+        .mizerie {
+            color: #000;
+            background: #ffe45c;
+            background: -moz-linear-gradient(top, #ffe45c 0%, #ffad1f 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffe45c), color-stop(100%, #ffad1f));
+            background: -webkit-linear-gradient(top, #ffe45c 0%, #ffad1f 100%);
+            background: -o-linear-gradient(top, #ffe45c 0%, #ffad1f 100%);
+            background: -ms-linear-gradient(top, #ffe45c 0%, #ffad1f 100%);
+            background: linear-gradient(to bottom, #ffe45c 0%, #ffad1f 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffe45c', endColorstr='#ffad1f', GradientType=0);
+            font-weight: bold;
+            display: block;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 1px 3px rgba(0, 0, 0, .25);
+        }
+        
+        .text-mizerie {
+            background-color: transparent;
+            border: 0;
+            font-size: 6em;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+        
+        #banda-rosie {
+            background-color: red;
+            position: absolute;
+            top: 0;
+            left: 40px;
+            padding: 0px 50px;
+            font-family: 'Oswald', sans-serif;
+            color: white;
+            font-size: 7em;
+            text-align: center;
+        }
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Anton|Francois+One|Oswald:700|PT+Sans+Narrow:700|Teko:700" rel="stylesheet">
+</head>
+
+<body>
+    <div id="background">
+        <section id="banda-rosie">
+            Exclusiv!
+        </section>
+
+        <section id="banda-galbena" class="mizerie">
+            <input type="text" class="text-mizerie" data-bind="textInput: inputText" />
+            <div id="banda-neagra">
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+
+    <script type="text/javascript">
+       function getParameterByName(name, url) {
+            if (!url) {
+            url = window.location.href;
+            }
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        var model = function(){
+            this.inputText = ko.observable('Gâdea ');
+
+            var mesaj = getParameterByName('mesaj');
+            if(mesaj) {
+                this.inputText('Gâdea ' + mesaj);
+            }
+
+            this.inputText.subscribe(function(newVal) {
+                if(!newVal.startsWith('Gâdea ')) {
+                    this.inputText('Gâdea ');
+                }
+            }.bind(this));
+
+            return this;
+        }();
+
+        ko.applyBindings(model);
+    </script>
+</body>
+
+</html>
