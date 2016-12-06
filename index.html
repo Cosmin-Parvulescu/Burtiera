@@ -129,17 +129,16 @@
                     href: 'https://cosmin-parvulescu.github.io/Burtiera/index.html?mesaj=' + $('<div/>').text(this.inputText()).html()
                 }, function(response){});
             }.bind(this);
+
             var mesaj = getParameterByName('mesaj');
             if(mesaj) {
-                this.inputText('Gâdea ' + mesaj);
+                this.inputText(mesaj);
             }
 
             this.inputText.subscribe(function(newVal) {
                 if(!newVal.startsWith('Gâdea ')) {
                     this.inputText('Gâdea ');
                 }
-
-                window.location
             }.bind(this));
 
             return this;
