@@ -2,6 +2,14 @@
 <html>
 
 <head>
+    <title>Burtiera</title>
+
+    <meta property="og:url" content="https://cosmin-parvulescu.github.io/Burtiera/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Burtiera" />
+    <meta property="og:description" content="Afișează ce vrei pe burtiera lu' Gâdea!'" />
+    <meta property="og:image" content="http://imgur.com/a/6nKE7.jpg" />
+
     <style>
         html,
         body {
@@ -27,7 +35,7 @@
         }
         
         #banda-neagra {
-            height: 75px;
+            padding: 15px;
             background: black;
         }
         
@@ -83,8 +91,16 @@
         <section id="banda-galbena" class="mizerie">
             <input type="text" class="text-mizerie" data-bind="textInput: inputText" />
             <div id="banda-neagra">
+                <div>
+                    <button data-bind="click: shareOnFb">Share</button>
+                </div>
+                <div class="fb-like" data-href="https://cosmin-parvulescu.github.io/Burtiera" data-layout="box_count" data-action="like"
+                    data-show-faces="true">
+                </div>
             </div>
         </section>
+
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -107,7 +123,12 @@
 
         var model = function(){
             this.inputText = ko.observable('Gâdea ');
-
+            this.shareOnFb = function() {
+                FB.ui({
+                    method: 'share',
+                    href: 'https://cosmin-parvulescu.github.io/Burtiera/' + $('<div/>').text(this.inputText()).html()
+                }, function(response){});
+            }.bind(this);
             var mesaj = getParameterByName('mesaj');
             if(mesaj) {
                 this.inputText('Gâdea ' + mesaj);
@@ -126,6 +147,24 @@
 
         ko.applyBindings(model);
     </script>
+
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '191969071264962',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 </body>
 
 </html>
